@@ -1,4 +1,4 @@
-package com.ejmeri.cursosmc.resource;
+package com.ejmeri.cursosmc.controllers;
 
 
 import java.util.List;
@@ -15,7 +15,7 @@ import com.ejmeri.cursosmc.services.CategoryService;
 
 @RestController
 @RequestMapping(value="/categories")
-public class CategoryResource {
+public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
