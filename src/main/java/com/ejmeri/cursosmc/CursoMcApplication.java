@@ -5,16 +5,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.ejmeri.cursosmc.domain.Address;
 import com.ejmeri.cursosmc.domain.Category;
 import com.ejmeri.cursosmc.domain.City;
+import com.ejmeri.cursosmc.domain.Client;
 import com.ejmeri.cursosmc.domain.Product;
 import com.ejmeri.cursosmc.domain.State;
+import com.ejmeri.cursosmc.domain.enums.ClientType;
+import com.ejmeri.cursosmc.repositories.AddressRepository;
 import com.ejmeri.cursosmc.repositories.CategoryRepository;
 import com.ejmeri.cursosmc.repositories.CityRepository;
+import com.ejmeri.cursosmc.repositories.ClientRepository;
 import com.ejmeri.cursosmc.repositories.ProductRepository;
 import com.ejmeri.cursosmc.repositories.StateRepository;
 
@@ -29,6 +32,10 @@ public class CursoMcApplication implements CommandLineRunner {
 	private StateRepository stateRepository;
 	@Autowired
 	private CityRepository cityRepository;
+	@Autowired
+	private ClientRepository clientRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	
 	public static void main(String[] args) {
@@ -66,7 +73,18 @@ public class CursoMcApplication implements CommandLineRunner {
 		
 		this.stateRepository.saveAll(Arrays.asList(stateOne, stateTwo));
 		this.cityRepository.saveAll(Arrays.asList(cityOne, cityTwo, cityThree));
-				
+		
+		Client client = new Client(null, "Elmeri Silva", "elmeri@teste.com", "00912365475", ClientType.PessoaFisica);
+		client.getTelephones().addAll(Arrays.asList("912344321", "912344320"));
+		
+		Address address1 = new Address(null, "Rua Sei lá", "1", "não tem", "sei laá", "1234321", client, cityOne);
+		Address address2 = new Address(null, "Rua Sei lá", "76768", "não tem", "sei laá", "1234321", client, cityOne);
+		
+		client.getAddresses().addAll(Arrays.asList(address1, address2));
+		
+		this.clientRepository.save(client);
+		this.addressRepository.saveAll(Arrays.asList(address1, address2));
+		
 	}
 	
 
