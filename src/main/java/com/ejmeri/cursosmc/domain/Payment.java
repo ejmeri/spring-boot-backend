@@ -19,7 +19,7 @@ public class Payment implements Serializable {
 
 	@Id
 	private Integer id;
-	private StatusPayment status;
+	private Integer status;
 	
 	@OneToOne
 	@JoinColumn(name= "orderId")
@@ -31,17 +31,17 @@ public class Payment implements Serializable {
 
 	public Payment(Integer id, StatusPayment status, Order order) {
 		this.id = id;
-		this.setStatus(status);
+		this.status = status.getCode();
 		this.setOrder(order);
 	}
 	
 
 	public StatusPayment getStatus() {
-		return status;
+		return StatusPayment.toEnum(status);
 	}
 
 	public void setStatus(StatusPayment status) {
-		this.status = status;
+		this.status = status.getCode();
 	}
 
 	public Order getOrder() {

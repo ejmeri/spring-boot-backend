@@ -33,16 +33,15 @@ public class Order implements Serializable {
     private Client client;
     
     @ManyToOne
-    @JoinColumn(name =  "addressId")
+    @JoinColumn(name =  "addressDeliveryId")
     private Address addressDelivery;
 
     public Order() {
     }
 
-    public Order(Integer id, Date createdAt, Payment payment, Client client, Address addressDelivery) {
+    public Order(Integer id, Date createdAt, Client client, Address addressDelivery) {
         this.id = id;
         this.createdAt = createdAt;
-        this.payment = payment;
         this.client = client;
         this.addressDelivery = addressDelivery;
     }
