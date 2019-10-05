@@ -1,19 +1,26 @@
 package com.ejmeri.cursosmc.domain;
 
 import java.io.Serializable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 import com.ejmeri.cursosmc.domain.enums.StatusPayment;
 
+@Entity
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private StatusPayment status;
+	
+	@OneToOne
+	@JoinColumn(name= "orderId")
+	@MapsId // ID DO PAGAMENTO SERA O MESMO DO PEDIDO
 	private Order order;
 
 	public Payment() {
