@@ -1,7 +1,10 @@
 package com.ejmeri.cursosmc.domain;
 
+import javax.persistence.Entity;
+
 import com.ejmeri.cursosmc.domain.enums.StatusPayment;
 
+@Entity()
 public class CardPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 

@@ -8,21 +8,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Entity
+@Entity(name = "orders")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")  // RESOLVE ERRO DE ENTIDADE TRANSENTE   
     private Payment payment;
     
+    @ManyToOne
+    @JoinColumn(name =  "clientId")
     private Client client;
+    
+    @ManyToOne
+    @JoinColumn(name =  "addressId")
     private Address addressDelivery;
 
     public Order() {

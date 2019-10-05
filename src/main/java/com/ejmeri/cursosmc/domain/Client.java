@@ -32,12 +32,13 @@ public class Client implements Serializable {
 	
 	@JsonManagedReference // REFERENCIA CICLICA
 	@OneToMany(mappedBy = "client")
-	private List<Address> addresses = new ArrayList<Address>();
+	private List<Address> addresses = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "telephone")
 	private Set<String> telephones = new HashSet<>();
 
+	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 
 	public Client() {
