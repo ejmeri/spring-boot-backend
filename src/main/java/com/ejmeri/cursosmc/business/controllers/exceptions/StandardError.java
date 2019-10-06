@@ -1,4 +1,4 @@
-package com.ejmeri.cursosmc.controllers.exceptions;
+package com.ejmeri.cursosmc.business.controllers.exceptions;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.ejmeri.cursosmc.controllers;
+package com.ejmeri.cursosmc.business.controllers;
 
 
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ejmeri.cursosmc.domain.Category;
-import com.ejmeri.cursosmc.services.CategoryService;
+import com.ejmeri.cursosmc.business.categories.entity.Category;
+import com.ejmeri.cursosmc.business.categories.service.CategoryService;
 
 @RestController
 @RequestMapping(value="/categories")

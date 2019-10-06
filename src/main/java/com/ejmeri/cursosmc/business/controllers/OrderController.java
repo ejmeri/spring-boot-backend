@@ -1,4 +1,4 @@
-package com.ejmeri.cursosmc.controllers;
+package com.ejmeri.cursosmc.business.controllers;
 
 
 import java.util.List;

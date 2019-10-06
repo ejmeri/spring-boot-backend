@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.ejmeri.cursosmc.business.categories.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

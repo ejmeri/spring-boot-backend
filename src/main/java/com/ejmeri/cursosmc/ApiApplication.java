@@ -11,7 +11,6 @@ import java.util.Arrays;
 import com.ejmeri.cursosmc.domain.Address;
 import com.ejmeri.cursosmc.domain.BillPayment;
 import com.ejmeri.cursosmc.domain.CardPayment;
-import com.ejmeri.cursosmc.domain.Category;
 import com.ejmeri.cursosmc.domain.City;
 import com.ejmeri.cursosmc.domain.Client;
 import com.ejmeri.cursosmc.domain.Order;
@@ -22,7 +21,6 @@ import com.ejmeri.cursosmc.domain.State;
 import com.ejmeri.cursosmc.domain.enums.ClientType;
 import com.ejmeri.cursosmc.domain.enums.StatusPayment;
 import com.ejmeri.cursosmc.repositories.AddressRepository;
-import com.ejmeri.cursosmc.repositories.CategoryRepository;
 import com.ejmeri.cursosmc.repositories.CityRepository;
 import com.ejmeri.cursosmc.repositories.ClientRepository;
 import com.ejmeri.cursosmc.repositories.OrderItemRepository;
@@ -30,9 +28,11 @@ import com.ejmeri.cursosmc.repositories.OrderRepository;
 import com.ejmeri.cursosmc.repositories.PaymentRepository;
 import com.ejmeri.cursosmc.repositories.ProductRepository;
 import com.ejmeri.cursosmc.repositories.StateRepository;
+import com.ejmeri.cursosmc.business.categories.entity.Category;
+import com.ejmeri.cursosmc.business.categories.service.CategoryRepository;
 
 @SpringBootApplication
-public class CursoMcApplication implements CommandLineRunner {
+public class ApiApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -55,7 +55,7 @@ public class CursoMcApplication implements CommandLineRunner {
 	
 	
 	public static void main(String[] args) {
-		SpringApplication.run(CursoMcApplication.class, args);
+		SpringApplication.run(ApiApplication.class, args);
 	}
 
 	@Override
