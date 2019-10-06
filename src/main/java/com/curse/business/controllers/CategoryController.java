@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class CategoryController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Category> save(@RequestBody Category category) {
+	public ResponseEntity<Void> save(@RequestBody Category category) {
 		category = this.categoryService.save(category);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -45,5 +46,11 @@ public class CategoryController {
 				.buildAndExpand(category.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build(); 
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @RequestBody Category category) {
+		this.categoryService.update(id, category);
+		return ResponseEntity.noContent().build(); 
 	}
 }

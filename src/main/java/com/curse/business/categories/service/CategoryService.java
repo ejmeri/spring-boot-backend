@@ -29,4 +29,14 @@ public class CategoryService {
 	public Category save(Category category) {
 		return this.categoryRepository.save(category);
 	}
+
+	public Category update (Integer id, Category category) {
+		if (id == null) {
+			throw new ObjectNotFoundException("Categoria não encontrada!");
+		}
+		this.findbyId(id);
+		
+		category.setId(id);
+		return this.categoryRepository.save(category);
+	}
 }
