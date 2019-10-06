@@ -3,10 +3,8 @@ package com.ejmeri.cursosmc.services;
 
 import java.util.List;
 
-import com.ejmeri.cursosmc.domain.Order;
 import com.ejmeri.cursosmc.domain.OrderItem;
 import com.ejmeri.cursosmc.repositories.OrderItemRepository;
-import com.ejmeri.cursosmc.repositories.OrderRepository;
 import com.ejmeri.cursosmc.services.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
