@@ -14,6 +14,10 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
+	public List<Category> findAll() {
+		return this.categoryRepository.findAll();
+	}
+
 	public Category findbyId(Integer id) {
 		Category category = categoryRepository.findById(id).orElse(null);
 
@@ -23,15 +27,9 @@ public class CategoryService {
 
 		return category;
 	}
-	
-	public List<Category> findAll() {
-		return this.categoryRepository.findAll();
-	}
-
 	public Category save(Category category) {
 		return this.categoryRepository.save(category);
 	}
-
 	public Category update (Integer id, Category category) {
 		if (id == null) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
@@ -41,7 +39,6 @@ public class CategoryService {
 		category.setId(id);
 		return this.categoryRepository.save(category);
 	}
-
 	public void delete (Integer id) {
 		if (id == null) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
