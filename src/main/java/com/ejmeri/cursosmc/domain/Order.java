@@ -18,7 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity(name = "orders")
 public class Order implements Serializable {
@@ -32,11 +31,11 @@ public class Order implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date createdAt;
 
-    @JsonManagedReference // permitir serializar payments
+     // permitir serializar payments
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order") // RESOLVE ERRO DE ENTIDADE TRANSENTE
     private Payment payment;
 
-    @JsonManagedReference
+    
     @ManyToOne
     @JoinColumn(name = "clientId")
     private Client client;

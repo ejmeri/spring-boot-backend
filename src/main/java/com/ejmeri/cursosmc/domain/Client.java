@@ -15,8 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.ejmeri.cursosmc.domain.enums.ClientType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Client implements Serializable {
@@ -31,7 +30,7 @@ public class Client implements Serializable {
 	private String document;
 	private Integer type;
 	
-	@JsonManagedReference // REFERENCIA CICLICA
+	 // REFERENCIA CICLICA
 	@OneToMany(mappedBy = "client")
 	private List<Address> addresses = new ArrayList<>();
 	
@@ -39,7 +38,7 @@ public class Client implements Serializable {
 	@CollectionTable(name = "telephone")
 	private Set<String> telephones = new HashSet<>();
 
-	@JsonBackReference // n serializar os pedidos de um cliente
+	@JsonIgnore // n serializar os pedidos de um cliente
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 
