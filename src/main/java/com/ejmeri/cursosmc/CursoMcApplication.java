@@ -15,6 +15,7 @@ import com.ejmeri.cursosmc.domain.Category;
 import com.ejmeri.cursosmc.domain.City;
 import com.ejmeri.cursosmc.domain.Client;
 import com.ejmeri.cursosmc.domain.Order;
+import com.ejmeri.cursosmc.domain.OrderItem;
 import com.ejmeri.cursosmc.domain.Payment;
 import com.ejmeri.cursosmc.domain.Product;
 import com.ejmeri.cursosmc.domain.State;
@@ -24,6 +25,7 @@ import com.ejmeri.cursosmc.repositories.AddressRepository;
 import com.ejmeri.cursosmc.repositories.CategoryRepository;
 import com.ejmeri.cursosmc.repositories.CityRepository;
 import com.ejmeri.cursosmc.repositories.ClientRepository;
+import com.ejmeri.cursosmc.repositories.OrderItemRepository;
 import com.ejmeri.cursosmc.repositories.OrderRepository;
 import com.ejmeri.cursosmc.repositories.PaymentRepository;
 import com.ejmeri.cursosmc.repositories.ProductRepository;
@@ -48,6 +50,8 @@ public class CursoMcApplication implements CommandLineRunner {
 	private OrderRepository orderRepository;
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	
 	public static void main(String[] args) {
@@ -110,6 +114,19 @@ public class CursoMcApplication implements CommandLineRunner {
 		client.getOrders().addAll(Arrays.asList(orderOne, orderTwo));
 		this.orderRepository.saveAll(Arrays.asList(orderOne, orderTwo));
 		this.paymentRepository.saveAll(Arrays.asList(cardPayment, billPayment));
+
+		OrderItem orderItemOne = new OrderItem(orderOne, pone, 0.00, 1, 2000.00);
+		OrderItem orderItemTwo = new OrderItem(orderOne, pthree, 0.00, 2, 80.00);
+		OrderItem orderItemThree = new OrderItem(orderTwo,  ptwo, 0.00, 7, 239.9);
+
+		orderOne.getItems().addAll(Arrays.asList(orderItemOne, orderItemTwo));
+		orderTwo.getItems().addAll(Arrays.asList(orderItemThree));
+
+		pone.getItems().addAll(Arrays.asList(orderItemOne));
+		ptwo.getItems().addAll(Arrays.asList(orderItemThree));
+		pthree.getItems().addAll(Arrays.asList(orderItemTwo));
+
+		orderItemRepository.saveAll(Arrays.asList(orderItemOne, orderItemTwo, orderItemThree));
 	}
 	
 

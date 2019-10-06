@@ -2,6 +2,8 @@ package com.ejmeri.cursosmc.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,31 +12,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name = "orders")
 public class Order implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order")  // RESOLVE ERRO DE ENTIDADE TRANSENTE   
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order") // RESOLVE ERRO DE ENTIDADE TRANSENTE
     private Payment payment;
-    
+
     @ManyToOne
-    @JoinColumn(name =  "clientId")
+    @JoinColumn(name = "clientId")
     private Client client;
-    
+
     @ManyToOne
-    @JoinColumn(name =  "addressDeliveryId")
+    @JoinColumn(name = "addressDeliveryId")
     private Address addressDelivery;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
@@ -88,6 +94,14 @@ public class Order implements Serializable {
 
     public void setAddressDelivery(Address addressDelivery) {
         this.addressDelivery = addressDelivery;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<OrderItem> items) {
+        this.items = items;
     }
 
     @Override
