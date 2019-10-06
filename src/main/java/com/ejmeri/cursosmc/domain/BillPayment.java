@@ -7,14 +7,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.ejmeri.cursosmc.domain.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class BillPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dueDate;
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date paymentDate;
 
 	public BillPayment() {

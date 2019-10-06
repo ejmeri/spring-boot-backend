@@ -4,10 +4,13 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    @JsonIgnore // n serializar
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
     
@@ -35,10 +38,12 @@ public class OrderItem implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore // alem do Id ignorar pedido
     public Order getOrder() {
         return id.getOrder();
     }
 
+    // pedido deve ser serializado
     public Product getProduct() {
         return id.getProduct();
     }

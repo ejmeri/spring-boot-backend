@@ -11,6 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.ejmeri.cursosmc.domain.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // uma tabela p cada sub
@@ -21,6 +22,7 @@ public class Payment implements Serializable {
 	private Integer id;
 	private Integer status;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name= "orderId")
 	@MapsId // ID DO PAGAMENTO SERA O MESMO DO PEDIDO
