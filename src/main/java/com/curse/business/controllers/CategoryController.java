@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -61,5 +63,13 @@ public class CategoryController {
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.categoryService.delete(id);
 		return ResponseEntity.noContent().build(); 
+	}
+
+	@GetMapping("page")
+	public ResponseEntity<Page<CategoryDTO>> findByPage(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "24") Integer size) {
+		Page<Category> categories = this.categoryService.findPage(page, size, "name", "ASC");
+		Page<CategoryDTO> categoryModels = categories.map(obj -> new CategoryDTO(obj));
+						
+		return ResponseEntity.ok().body(categoryModels);
 	}
 }

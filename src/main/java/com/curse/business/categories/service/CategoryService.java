@@ -6,6 +6,9 @@ import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,5 +54,10 @@ public class CategoryService {
 		} catch (Exception e) {
 			throw new ObjectNotFoundException("Erro ao deletar categoria! -> " + e.getMessage());
 		}
+	}
+	public Page<Category> findPage(Integer page, Integer size, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
+		return this.categoryRepository.findAll(pageRequest);
+
 	}
 }
