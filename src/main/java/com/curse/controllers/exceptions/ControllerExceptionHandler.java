@@ -1,4 +1,4 @@
-package com.curse.business.controllers.exceptions;
+package com.curse.controllers.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package com.curse.business.controllers;
+package com.curse.controllers;
 
 import java.net.URI;
 import java.util.List;
