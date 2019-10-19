@@ -25,55 +25,56 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value="/categories")
+@RequestMapping(value = "/categories")
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@GetMapping()
 	public ResponseEntity<List<CategoryDTO>> findAll() {
 		List<Category> categories = this.categoryService.findAll();
-		List<CategoryDTO> categoryModels = categories
-					.stream()
-					.map(obj -> new CategoryDTO(obj))
-					.collect(Collectors.toList());
-						
+		List<CategoryDTO> categoryModels = categories.stream().map(obj -> new CategoryDTO(obj))
+				.collect(Collectors.toList());
+
 		return ResponseEntity.ok().body(categoryModels);
 	}
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Integer id) {
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Integer id) {
 		Category category = this.categoryService.findbyId(id);
-		return ResponseEntity.ok().body(category);
+		CategoryDTO categoryModels = new CategoryDTO(category);
+		return ResponseEntity.ok().body(categoryModels);
 	}
+
 	@PostMapping()
 	public ResponseEntity<Void> save(@Valid @RequestBody CategoryDTO categoryDto) {
 		Category category = this.categoryService.fromDto(categoryDto);
 		category = this.categoryService.save(category);
-		URI uri = ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(category.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(category.getId())
 				.toUri();
-		return ResponseEntity.created(uri).build(); 
+		return ResponseEntity.created(uri).build();
 	}
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable("id") Integer id,@Valid @RequestBody CategoryDTO categoryDTO) {
+	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @Valid @RequestBody CategoryDTO categoryDTO) {
 		Category category = this.categoryService.fromDto(categoryDTO);
 		this.categoryService.update(id, category);
-		return ResponseEntity.noContent().build(); 
+		return ResponseEntity.noContent().build();
 	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.categoryService.delete(id);
-		return ResponseEntity.noContent().build(); 
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("page")
-	public ResponseEntity<Page<CategoryDTO>> findByPage(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "24") Integer size) {
+	public ResponseEntity<Page<CategoryDTO>> findByPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "24") Integer size) {
 		Page<Category> categories = this.categoryService.findPage(page, size, "name", "ASC");
 		Page<CategoryDTO> categoryModels = categories.map(obj -> new CategoryDTO(obj));
-						
+
 		return ResponseEntity.ok().body(categoryModels);
 	}
 }

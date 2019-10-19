@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.curse.business.clientes.dto.ClientDTO;
 import com.curse.business.clientes.enums.ClientType;
 import com.curse.domain.Address;
 import com.curse.domain.Order;
@@ -52,7 +53,10 @@ public class Client implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.document = document;
-		this.type = type.getCode();
+		this.type = type == null ? null :  type.getCode();
+	}
+
+	public Client(ClientDTO clientDto) {
 	}
 
 	public Integer getId() {

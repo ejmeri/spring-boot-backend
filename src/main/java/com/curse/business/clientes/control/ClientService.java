@@ -2,14 +2,16 @@ package com.curse.business.clientes.control;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.curse.business.clientes.dto.ClientDTO;
 import com.curse.business.clientes.entity.Client;
+import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,35 +20,60 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 
+public List<Client> findAll() {
+		return this.clientRepository.findAll();
+	}
+
 	public Client findbyId(Integer id) {
 		Client client = clientRepository.findById(id).orElse(null);
 
 		if (client == null) {
-			throw new ObjectNotFoundException("Cliente não encontrado!");
+			throw new ObjectNotFoundException("Cliente não encontrada!");
 		}
 
 		return client;
 	}
 
-	public List<Client> findAll() {
-		return this.clientRepository.findAll();
-	}
-
 	public Client save(Client client) {
-		return null;
+		return this.clientRepository.save(client);
 	}
 
-	public void update(Integer id, Client client) {
+	public Client update(Integer id, Client client) {
+		if (id == null) {
+			throw new ObjectNotFoundException("Cliente não encontrada!");
+		}
+		Client oldClient = this.findbyId(id);
+		this.updateClient(oldClient, client);
+
+		return this.clientRepository.save(oldClient);
+	}
+
+	private void updateClient(Client oldClient, Client client) {
+		oldClient.setName(client.getName());
+		oldClient.setEmail(client.getEmail());
 	}
 
 	public void delete(Integer id) {
+		if (id == null) {
+			throw new ObjectNotFoundException("Cliente não encontrada!");
+		}
+
+		try {
+			this.clientRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrationException("Não é possível excluir uma cliente que possui pedidos!");
+		} catch (Exception e) {
+			throw new ObjectNotFoundException("Erro ao deletar cliente! -> " + e.getMessage());
+		}
 	}
 
-	public Page<Client> findPage(Integer page, Integer size, String string, String string2) {
-		return null;
+	public Page<Client> findPage(Integer page, Integer size, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
+		return this.clientRepository.findAll(pageRequest);
+
 	}
 
-	public Client fromDto(@Valid ClientDTO clientDto) {
-		return null;
+	public Client fromDto(ClientDTO clientDto) {
+		return new Client( clientDto.getId(), clientDto.getEmail(), clientDto.getName(), null, null);
 	}
 }

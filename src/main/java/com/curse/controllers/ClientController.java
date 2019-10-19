@@ -2,6 +2,7 @@ package com.curse.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -24,53 +25,53 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value="/clients")
+@RequestMapping(value = "/clients")
 public class ClientController {
-	
+
 	@Autowired
 	private ClientService clientService;
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> findById(@PathVariable Integer id) {
+	public ResponseEntity<ClientDTO> findById(@PathVariable Integer id) {
 		Client client = this.clientService.findbyId(id);
-		return ResponseEntity.ok().body(client);
+		ClientDTO clientDTO = new ClientDTO(client);
+		return ResponseEntity.ok().body(clientDTO);
 	}
-	
+
 	@GetMapping()
-	public ResponseEntity<?> findAll() {
+	public ResponseEntity<List<ClientDTO>> findAll() {
 		List<Client> clients = this.clientService.findAll();
-		return ResponseEntity.ok(clients);
+		List<ClientDTO> clientsModel = clients.stream().map(obj -> new ClientDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok(clientsModel);
 	}
 
 	@PostMapping()
 	public ResponseEntity<Void> save(@Valid @RequestBody ClientDTO clientDto) {
 		Client client = this.clientService.fromDto(clientDto);
 		client = this.clientService.save(client);
-		URI uri = ServletUriComponentsBuilder
-				.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(client.getId())
-				.toUri();
-		return ResponseEntity.created(uri).build(); 
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
+
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable("id") Integer id,@Valid @RequestBody ClientDTO clientDTO) {
+	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @Valid @RequestBody ClientDTO clientDTO) {
 		Client client = this.clientService.fromDto(clientDTO);
 		this.clientService.update(id, client);
-		return ResponseEntity.noContent().build(); 
+		return ResponseEntity.noContent().build();
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.clientService.delete(id);
-		return ResponseEntity.noContent().build(); 
+		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("page")
-	public ResponseEntity<Page<ClientDTO>> findByPage(@RequestParam(value = "page", defaultValue = "0") Integer page, @RequestParam(value = "size", defaultValue = "24") Integer size) {
-		Page<Client> categories = this.clientService.findPage(page, size, "name", "ASC");
-		Page<ClientDTO> clientModels = categories.map(obj -> new ClientDTO(obj));
-						
+	public ResponseEntity<Page<ClientDTO>> findByPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "24") Integer size) {
+		Page<Client> clients = this.clientService.findPage(page, size, "name", "ASC");
+		Page<ClientDTO> clientModels = clients.map(obj -> new ClientDTO(obj));
+
 		return ResponseEntity.ok().body(clientModels);
 	}
 }
