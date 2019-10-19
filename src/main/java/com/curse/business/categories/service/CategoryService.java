@@ -1,6 +1,8 @@
 package com.curse.business.categories.service;
 
 import java.util.List;
+
+import com.curse.business.categories.dto.CategoryDTO;
 import com.curse.business.categories.entity.Category;
 import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
@@ -13,10 +15,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	public List<Category> findAll() {
 		return this.categoryRepository.findAll();
 	}
@@ -30,10 +32,12 @@ public class CategoryService {
 
 		return category;
 	}
+
 	public Category save(Category category) {
 		return this.categoryRepository.save(category);
 	}
-	public Category update (Integer id, Category category) {
+
+	public Category update(Integer id, Category category) {
 		if (id == null) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
 		}
@@ -42,7 +46,8 @@ public class CategoryService {
 		category.setId(id);
 		return this.categoryRepository.save(category);
 	}
-	public void delete (Integer id) {
+
+	public void delete(Integer id) {
 		if (id == null) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
 		}
@@ -55,9 +60,14 @@ public class CategoryService {
 			throw new ObjectNotFoundException("Erro ao deletar categoria! -> " + e.getMessage());
 		}
 	}
+
 	public Page<Category> findPage(Integer page, Integer size, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
 		return this.categoryRepository.findAll(pageRequest);
 
+	}
+
+	public Category fromDto(CategoryDTO categoryDTO) {
+		return new Category(categoryDTO.getId(), categoryDTO.getName());
 	}
 }

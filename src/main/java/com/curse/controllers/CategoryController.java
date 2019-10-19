@@ -4,6 +4,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import com.curse.business.categories.dto.CategoryDTO;
+import com.curse.business.categories.entity.Category;
+import com.curse.business.categories.service.CategoryService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.curse.business.categories.dto.CategoryDTO;
-import com.curse.business.categories.entity.Category;
-import com.curse.business.categories.service.CategoryService;
 
 @RestController
 @RequestMapping(value="/categories")
@@ -45,7 +47,8 @@ public class CategoryController {
 		return ResponseEntity.ok().body(category);
 	}
 	@PostMapping()
-	public ResponseEntity<Void> save(@RequestBody Category category) {
+	public ResponseEntity<Void> save(@Valid @RequestBody CategoryDTO categoryDto) {
+		Category category = this.categoryService.fromDto(categoryDto);
 		category = this.categoryService.save(category);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest()
@@ -55,7 +58,8 @@ public class CategoryController {
 		return ResponseEntity.created(uri).build(); 
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable("id") Integer id, @RequestBody Category category) {
+	public ResponseEntity<Void> update(@PathVariable("id") Integer id,@Valid @RequestBody CategoryDTO categoryDTO) {
+		Category category = this.categoryService.fromDto(categoryDTO);
 		this.categoryService.update(id, category);
 		return ResponseEntity.noContent().build(); 
 	}
