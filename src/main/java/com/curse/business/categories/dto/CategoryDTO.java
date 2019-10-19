@@ -2,10 +2,10 @@ package com.curse.business.categories.dto;
 
 import java.io.Serializable;
 
-import com.curse.business.categories.entity.Category;
+import javax.validation.constraints.NotEmpty;
 
+import com.curse.business.categories.entity.Category;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 public class CategoryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
