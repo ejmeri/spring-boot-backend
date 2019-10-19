@@ -1,4 +1,4 @@
-package com.curse.domain;
+package com.curse.business.clientes.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.curse.domain.enums.ClientType;
+import com.curse.business.clientes.enums.ClientType;
+import com.curse.domain.Address;
+import com.curse.domain.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,11 +31,11 @@ public class Client implements Serializable {
 	private String email;
 	private String document;
 	private Integer type;
-	
-	 // REFERENCIA CICLICA
+
+	// REFERENCIA CICLICA
 	@OneToMany(mappedBy = "client")
 	private List<Address> addresses = new ArrayList<>();
-	
+
 	@ElementCollection
 	@CollectionTable(name = "telephone")
 	private Set<String> telephones = new HashSet<>();
@@ -145,5 +147,5 @@ public class Client implements Serializable {
 			return false;
 		return true;
 	}
-		
+
 }

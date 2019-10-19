@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.curse.business.clientes.entity.Client;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "orders")

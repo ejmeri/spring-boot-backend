@@ -1,4 +1,4 @@
-package com.curse.domain.enums;
+package com.curse.business.clientes.enums;
 
 public enum ClientType {
 	PessoaFisica(1, "Pessoa Física"), PessoaJuridica(2, "Pessoa Jurídica");

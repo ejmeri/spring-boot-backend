@@ -1,24 +1,21 @@
 package com.curse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import com.curse.business.categories.entity.Category;
+import com.curse.business.categories.service.CategoryRepository;
+import com.curse.business.clientes.entity.Client;
+import com.curse.business.clientes.enums.ClientType;
 import com.curse.domain.Address;
 import com.curse.domain.BillPayment;
 import com.curse.domain.CardPayment;
 import com.curse.domain.City;
-import com.curse.domain.Client;
 import com.curse.domain.Order;
 import com.curse.domain.OrderItem;
 import com.curse.domain.Payment;
 import com.curse.domain.Product;
 import com.curse.domain.State;
-import com.curse.domain.enums.ClientType;
 import com.curse.domain.enums.StatusPayment;
 import com.curse.repositories.AddressRepository;
 import com.curse.repositories.CityRepository;
@@ -28,8 +25,11 @@ import com.curse.repositories.OrderRepository;
 import com.curse.repositories.PaymentRepository;
 import com.curse.repositories.ProductRepository;
 import com.curse.repositories.StateRepository;
-import com.curse.business.categories.entity.Category;
-import com.curse.business.categories.service.CategoryRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ApiApplication implements CommandLineRunner {
