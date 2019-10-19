@@ -1,9 +1,10 @@
-package com.curse.domain;
+package com.curse.business.orders.entity;
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.curse.business.products.entity.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

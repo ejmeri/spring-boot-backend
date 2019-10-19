@@ -1,4 +1,4 @@
-package com.curse.business.categories.service;
+package com.curse.business.categories.control;
 
 import com.curse.business.categories.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

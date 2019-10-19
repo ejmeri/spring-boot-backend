@@ -1,4 +1,4 @@
-package com.curse.domain;
+package com.curse.business.payments.entity;
 
 import java.util.Date;
 
@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.curse.business.orders.entity.Order;
 import com.curse.domain.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 

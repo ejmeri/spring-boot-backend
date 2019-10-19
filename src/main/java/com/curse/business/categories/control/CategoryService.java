@@ -1,4 +1,4 @@
-package com.curse.business.categories.service;
+package com.curse.business.categories.control;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import com.curse.business.categories.dto.CategoryDTO;
 import com.curse.business.categories.entity.Category;
 import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -41,10 +42,12 @@ public class CategoryService {
 		if (id == null) {
 			throw new ObjectNotFoundException("Categoria não encontrada!");
 		}
-		this.findbyId(id);
-
-		category.setId(id);
-		return this.categoryRepository.save(category);
+		Category oldCategory = this.findbyId(id);
+		if (oldCategory == null) {
+			throw new ObjectNotFoundException("Categoria não encontrada!");
+		}
+		oldCategory.setName((category.getName()));
+		return this.categoryRepository.save(oldCategory);
 	}
 
 	public void delete(Integer id) {

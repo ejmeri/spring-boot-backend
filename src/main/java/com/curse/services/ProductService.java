@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.curse.domain.Product;
+import com.curse.business.products.entity.Product;
 import com.curse.repositories.ProductRepository;
 
 @Service

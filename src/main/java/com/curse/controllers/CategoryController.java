@@ -8,7 +8,7 @@ import javax.validation.Valid;
 
 import com.curse.business.categories.dto.CategoryDTO;
 import com.curse.business.categories.entity.Category;
-import com.curse.business.categories.service.CategoryService;
+import com.curse.business.categories.control.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

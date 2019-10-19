@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.curse.domain.Product;
+import com.curse.business.products.entity.Product;
 
 
 @Entity
@@ -28,6 +28,7 @@ public class Category implements Serializable {
 
 	public Category() {
 	}
+	
 	public Category(Integer id, String name) {
 		this.id = id;
 		this.name = name;

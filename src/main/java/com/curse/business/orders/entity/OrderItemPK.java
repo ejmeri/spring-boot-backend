@@ -1,10 +1,12 @@
-package com.curse.domain;
+package com.curse.business.orders.entity;
 
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.curse.business.products.entity.Product;
 
 @Embeddable
 public class OrderItemPK implements Serializable {

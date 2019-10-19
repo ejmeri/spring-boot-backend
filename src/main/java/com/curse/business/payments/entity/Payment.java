@@ -1,4 +1,4 @@
-package com.curse.domain;
+package com.curse.business.payments.entity;
 
 import java.io.Serializable;
 
@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.curse.business.orders.entity.Order;
 import com.curse.domain.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,7 +34,7 @@ public class Payment implements Serializable {
 
 	public Payment(Integer id, StatusPayment status, Order order) {
 		this.id = id;
-		this.status = status.getCode();
+		this.status = status == null ? null : status.getCode();
 		this.setOrder(order);
 	}
 	

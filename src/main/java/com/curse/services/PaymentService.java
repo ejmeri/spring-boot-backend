@@ -3,7 +3,7 @@ package com.curse.services;
 
 import java.util.List;
 
-import com.curse.domain.Payment;
+import com.curse.business.payments.entity.Payment;
 import com.curse.repositories.PaymentRepository;
 import com.curse.services.exceptions.ObjectNotFoundException;
 

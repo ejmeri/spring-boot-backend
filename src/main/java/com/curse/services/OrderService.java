@@ -3,7 +3,7 @@ package com.curse.services;
 
 import java.util.List;
 
-import com.curse.domain.Order;
+import com.curse.business.orders.entity.Order;
 import com.curse.repositories.OrderRepository;
 import com.curse.services.exceptions.ObjectNotFoundException;
 

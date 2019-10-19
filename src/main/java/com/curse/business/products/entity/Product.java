@@ -1,4 +1,4 @@
-package com.curse.domain;
+package com.curse.business.products.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.curse.business.categories.entity.Category;
+import com.curse.business.orders.entity.Order;
+import com.curse.business.orders.entity.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

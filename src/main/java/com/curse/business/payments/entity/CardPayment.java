@@ -1,7 +1,8 @@
-package com.curse.domain;
+package com.curse.business.payments.entity;
 
 import javax.persistence.Entity;
 
+import com.curse.business.orders.entity.Order;
 import com.curse.domain.enums.StatusPayment;
 
 @Entity()
