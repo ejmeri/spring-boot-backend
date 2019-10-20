@@ -9,7 +9,6 @@ import com.curse.business.clientes.dto.ClientDTO;
 import com.curse.business.clientes.dto.ClientNewDto;
 import com.curse.business.clientes.entity.Client;
 import com.curse.business.clientes.enums.ClientType;
-import com.curse.repositories.AddressRepository;
 import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
 
