@@ -2,8 +2,14 @@ package com.curse.business.clientes.control;
 
 import java.util.List;
 
+import com.curse.business.addresses.control.AddressService;
+import com.curse.business.addresses.entity.Address;
+import com.curse.business.addresses.entity.City;
 import com.curse.business.clientes.dto.ClientDTO;
+import com.curse.business.clientes.dto.ClientNewDto;
 import com.curse.business.clientes.entity.Client;
+import com.curse.business.clientes.enums.ClientType;
+import com.curse.repositories.AddressRepository;
 import com.curse.services.exceptions.DataIntegrationException;
 import com.curse.services.exceptions.ObjectNotFoundException;
 
@@ -19,6 +25,8 @@ public class ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private AddressService addressService;
 
 public List<Client> findAll() {
 		return this.clientRepository.findAll();
@@ -35,7 +43,10 @@ public List<Client> findAll() {
 	}
 
 	public Client save(Client client) {
-		return this.clientRepository.save(client);
+		client.setId(null);
+		client = this.clientRepository.save(client);
+		this.addressService.saveAll(client.getAddresses());
+		return client;
 	}
 
 	public Client update(Integer id, Client client) {
@@ -75,5 +86,15 @@ public List<Client> findAll() {
 
 	public Client fromDto(ClientDTO clientDto) {
 		return new Client( clientDto.getId(), clientDto.getEmail(), clientDto.getName(), null, null);
+	}
+
+	public Client fromDto(ClientNewDto clientDto) {
+		Client client = new Client(null, clientDto.getEmail(), clientDto.getName(), clientDto.getDocument(), ClientType.toEnum(clientDto.getType()));
+		City city = new City(clientDto.getCityId(), null, null);
+		Address address = new Address(null, clientDto.getStreet(), clientDto.getNumber(), clientDto.getComplement(), clientDto.getNeighborhood(), clientDto.getZipcode(), client, city);
+		client.getAddresses().add(address);
+		client.getTelephones().addAll(clientDto.getTelephones());
+
+		return client;
 	}
 }

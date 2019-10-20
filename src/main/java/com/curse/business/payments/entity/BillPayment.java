@@ -7,13 +7,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.curse.business.orders.entity.Order;
-import com.curse.domain.enums.StatusPayment;
+import com.curse.business.payments.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class BillPayment extends Payment {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dueDate;
@@ -46,7 +46,4 @@ public class BillPayment extends Payment {
 		this.paymentDate = paymentDate;
 	}
 
-	
-	
-	
 }

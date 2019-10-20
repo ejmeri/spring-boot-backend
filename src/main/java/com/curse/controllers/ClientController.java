@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import com.curse.business.clientes.control.ClientService;
 import com.curse.business.clientes.dto.ClientDTO;
+import com.curse.business.clientes.dto.ClientNewDto;
 import com.curse.business.clientes.entity.Client;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,10 @@ public class ClientController {
 	private ClientService clientService;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ClientDTO> findById(@PathVariable Integer id) {
+	public ResponseEntity<Client> findById(@PathVariable Integer id) {
 		Client client = this.clientService.findbyId(id);
-		ClientDTO clientDTO = new ClientDTO(client);
-		return ResponseEntity.ok().body(clientDTO);
+		// ClientDTO clientDTO = new ClientDTO(client);
+		return ResponseEntity.ok().body(client);
 	}
 
 	@GetMapping()
@@ -46,7 +47,7 @@ public class ClientController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<Void> save(@Valid @RequestBody ClientDTO clientDto) {
+	public ResponseEntity<Void> save(@Valid @RequestBody ClientNewDto clientDto) {
 		Client client = this.clientService.fromDto(clientDto);
 		client = this.clientService.save(client);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();

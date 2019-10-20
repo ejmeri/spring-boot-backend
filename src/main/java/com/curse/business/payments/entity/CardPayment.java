@@ -3,7 +3,7 @@ package com.curse.business.payments.entity;
 import javax.persistence.Entity;
 
 import com.curse.business.orders.entity.Order;
-import com.curse.domain.enums.StatusPayment;
+import  com.curse.business.payments.enums.StatusPayment;
 
 @Entity()
 public class CardPayment extends Payment {

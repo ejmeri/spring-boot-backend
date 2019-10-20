@@ -14,10 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.curse.business.addresses.entity.Address;
 import com.curse.business.clientes.dto.ClientDTO;
 import com.curse.business.clientes.enums.ClientType;
 import com.curse.business.orders.entity.Order;
-import com.curse.domain.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

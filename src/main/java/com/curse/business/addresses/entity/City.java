@@ -1,38 +1,36 @@
-package com.curse.domain;
+package com.curse.business.addresses.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
-public class State implements Serializable {
+public class City implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "state")
-	private List<City> cities = new ArrayList<City>();
-	
-	public State() {
-		
+	@ManyToOne
+	@JoinColumn(name = "stateId")
+	private State state;
+
+	public City() {
+
 	}
-	
-	public State(Integer id, String name) {
+
+	public City(Integer id, String name, State state) {
 		this.id = id;
 		this.name = name;
+		this.state = state;
 	}
 
 	public Integer getId() {
@@ -47,12 +45,12 @@ public class State implements Serializable {
 		this.name = name;
 	}
 
-	public List<City> getCities() {
-		return cities;
+	public State getState() {
+		return state;
 	}
 
-	public void setCities(List<City> cities) {
-		this.cities = cities;
+	public void setState(State state) {
+		this.state = state;
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class State implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		State other = (State) obj;
+		City other = (City) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -79,8 +77,5 @@ public class State implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

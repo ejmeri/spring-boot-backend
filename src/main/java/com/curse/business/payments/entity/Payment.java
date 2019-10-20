@@ -11,7 +11,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.curse.business.orders.entity.Order;
-import com.curse.domain.enums.StatusPayment;
+import  com.curse.business.payments.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity

@@ -3,7 +3,7 @@ package com.curse.services;
 
 import java.util.List;
 
-import com.curse.domain.State;
+import com.curse.business.addresses.entity.State;
 import com.curse.repositories.StateRepository;
 import com.curse.services.exceptions.ObjectNotFoundException;
 

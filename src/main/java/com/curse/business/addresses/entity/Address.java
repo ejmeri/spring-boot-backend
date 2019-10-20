@@ -1,4 +1,4 @@
-package com.curse.domain;
+package com.curse.business.addresses.entity;
 
 import java.io.Serializable;
 
