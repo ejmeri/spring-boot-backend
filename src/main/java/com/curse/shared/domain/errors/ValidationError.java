@@ -1,4 +1,4 @@
-package com.curse.shared.domain;
+package com.curse.shared.domain.errors;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,12 +3,26 @@ package com.curse.business.clientes.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.curse.shared.domain.validators.ClientInsert;
+
+// import org.hibernate.validator.constraints.br.CPF;
+
+@ClientInsert
 public class ClientNewDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String name;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    // @CPF // anotacao para validar somente cpf
     private String document;
+    
     private Integer type;
     private String street;
     private String number;

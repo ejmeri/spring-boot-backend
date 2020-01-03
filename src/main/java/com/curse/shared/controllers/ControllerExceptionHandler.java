@@ -2,8 +2,8 @@ package com.curse.shared.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.curse.shared.domain.StandardError;
-import com.curse.shared.domain.ValidationError;
+import com.curse.shared.domain.errors.StandardError;
+import com.curse.shared.domain.errors.ValidationError;
 import com.curse.shared.exceptions.DataIntegrationException;
 import com.curse.shared.exceptions.ObjectNotFoundException;
 

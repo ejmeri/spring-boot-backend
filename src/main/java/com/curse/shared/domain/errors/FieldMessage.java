@@ -1,4 +1,4 @@
-package com.curse.shared.domain;
+package com.curse.shared.domain.errors;
 
 import java.io.Serializable;
 
@@ -20,6 +20,10 @@ public class FieldMessage implements Serializable {
     public String getFieldMessage() {
         return fieldName;
     }
+
+    public String getFieldName() {
+        return fieldName;
+    } 
 
     public void setFieldMessage(String fieldMessage) {
         this.fieldName = fieldMessage;
