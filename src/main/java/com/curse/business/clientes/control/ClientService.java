@@ -27,7 +27,7 @@ public class ClientService {
 	@Autowired
 	private AddressService addressService;
 
-public List<Client> findAll() {
+	public List<Client> findAll() {
 		return this.clientRepository.findAll();
 	}
 
@@ -39,6 +39,10 @@ public List<Client> findAll() {
 		}
 
 		return client;
+	}
+
+	public Client findbyEmail(String email) {
+		return clientRepository.findByEmail(email);
 	}
 
 	public Client save(Client client) {
@@ -84,13 +88,15 @@ public List<Client> findAll() {
 	}
 
 	public Client fromDto(ClientDTO clientDto) {
-		return new Client( clientDto.getId(), clientDto.getEmail(), clientDto.getName(), null, null);
+		return new Client(clientDto.getId(), clientDto.getEmail(), clientDto.getName(), null, null);
 	}
 
 	public Client fromDto(ClientNewDto clientDto) {
-		Client client = new Client(null, clientDto.getEmail(), clientDto.getName(), clientDto.getDocument(), ClientType.toEnum(clientDto.getType()));
+		Client client = new Client(null, clientDto.getEmail(), clientDto.getName(), clientDto.getDocument(),
+				ClientType.toEnum(clientDto.getType()));
 		City city = new City(clientDto.getCityId(), null, null);
-		Address address = new Address(null, clientDto.getStreet(), clientDto.getNumber(), clientDto.getComplement(), clientDto.getNeighborhood(), clientDto.getZipcode(), client, city);
+		Address address = new Address(null, clientDto.getStreet(), clientDto.getNumber(), clientDto.getComplement(),
+				clientDto.getNeighborhood(), clientDto.getZipcode(), client, city);
 		client.getAddresses().add(address);
 		client.getTelephones().addAll(clientDto.getTelephones());
 

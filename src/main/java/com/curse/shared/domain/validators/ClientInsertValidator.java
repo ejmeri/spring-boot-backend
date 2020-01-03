@@ -6,11 +6,18 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.curse.business.clientes.control.ClientService;
 import com.curse.business.clientes.dto.ClientNewDto;
+import com.curse.business.clientes.entity.Client;
 import com.curse.shared.domain.errors.FieldMessage;
 import com.curse.shared.helpers.DocumentUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class ClientInsertValidator implements ConstraintValidator<ClientInsert, ClientNewDto> {
+
+    @Autowired
+    private ClientService clienteService;
 
     @Override
     public void initialize(ClientInsert ann) {
@@ -41,6 +48,16 @@ public class ClientInsertValidator implements ConstraintValidator<ClientInsert, 
 
         if (document.length() == 14 && !DocumentUtil.isValidCNPJ(document)) {
             list.add(new FieldMessage("document", "CNPJ inválido"));
+        }
+
+        if (objDto.getEmail() == null) {
+            return false;
+        }
+
+        Client existsClient = this.clienteService.findbyEmail(objDto.getEmail());
+
+        if (existsClient != null) {
+            list.add(new FieldMessage("email", "Email já cadastrado"));
         }
 
         for (FieldMessage e : list) {
