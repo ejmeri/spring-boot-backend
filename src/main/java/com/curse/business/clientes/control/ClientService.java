@@ -9,8 +9,8 @@ import com.curse.business.clientes.dto.ClientDTO;
 import com.curse.business.clientes.dto.ClientNewDto;
 import com.curse.business.clientes.entity.Client;
 import com.curse.business.clientes.enums.ClientType;
-import com.curse.services.exceptions.DataIntegrationException;
-import com.curse.services.exceptions.ObjectNotFoundException;
+import com.curse.shared.exceptions.DataIntegrationException;
+import com.curse.shared.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

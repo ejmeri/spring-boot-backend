@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.curse.business.orders.control.OrderService;
 import com.curse.business.orders.entity.Order;
-import com.curse.services.OrderService;
-
 @RestController
 @RequestMapping(value="/orders")
 public class OrderController {

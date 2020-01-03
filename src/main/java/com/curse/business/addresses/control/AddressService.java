@@ -4,7 +4,7 @@ package com.curse.business.addresses.control;
 import java.util.List;
 
 import com.curse.business.addresses.entity.Address;
-import com.curse.services.exceptions.ObjectNotFoundException;
+import com.curse.shared.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

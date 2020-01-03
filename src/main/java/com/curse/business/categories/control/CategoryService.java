@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.curse.business.categories.dto.CategoryDTO;
 import com.curse.business.categories.entity.Category;
-import com.curse.services.exceptions.DataIntegrationException;
-import com.curse.services.exceptions.ObjectNotFoundException;
+import com.curse.shared.exceptions.DataIntegrationException;
+import com.curse.shared.exceptions.ObjectNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
