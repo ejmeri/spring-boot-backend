@@ -35,7 +35,7 @@ public List<Client> findAll() {
 		Client client = clientRepository.findById(id).orElse(null);
 
 		if (client == null) {
-			throw new ObjectNotFoundException("Cliente não encontrada!");
+			throw new ObjectNotFoundException("Cliente não encontrado!");
 		}
 
 		return client;
@@ -50,7 +50,7 @@ public List<Client> findAll() {
 
 	public Client update(Integer id, Client client) {
 		if (id == null) {
-			throw new ObjectNotFoundException("Cliente não encontrada!");
+			throw new ObjectNotFoundException("Cliente não encontrado!");
 		}
 		Client oldClient = this.findbyId(id);
 		this.updateClient(oldClient, client);
@@ -65,7 +65,7 @@ public List<Client> findAll() {
 
 	public void delete(Integer id) {
 		if (id == null) {
-			throw new ObjectNotFoundException("Cliente não encontrada!");
+			throw new ObjectNotFoundException("Cliente não encontrado!");
 		}
 
 		try {
