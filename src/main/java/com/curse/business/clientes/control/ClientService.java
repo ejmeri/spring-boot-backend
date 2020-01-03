@@ -88,7 +88,7 @@ public class ClientService {
 	}
 
 	public Client fromDto(ClientDTO clientDto) {
-		return new Client(clientDto.getId(), clientDto.getEmail(), clientDto.getName(), null, null);
+		return new Client(clientDto.getId(), clientDto.getName(), clientDto.getEmail(), null, null);
 	}
 
 	public Client fromDto(ClientNewDto clientDto) {

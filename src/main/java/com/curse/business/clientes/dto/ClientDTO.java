@@ -6,9 +6,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import com.curse.business.clientes.entity.Client;
+import com.curse.shared.domain.validators.ClientUpdate;
 
 import org.hibernate.validator.constraints.Length;
 
+@ClientUpdate
 public class ClientDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
