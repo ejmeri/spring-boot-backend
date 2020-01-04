@@ -13,9 +13,12 @@ import javax.persistence.OneToOne;
 import com.curse.business.orders.entity.Order;
 import  com.curse.business.payments.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // uma tabela p cada sub
+// Campo adicional > @type <
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property =  "@type")
 public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 

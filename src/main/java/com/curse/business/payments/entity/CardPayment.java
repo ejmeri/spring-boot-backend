@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 
 import com.curse.business.orders.entity.Order;
 import  com.curse.business.payments.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@Entity()
+@Entity
+@JsonTypeName("cardPayment")
 public class CardPayment extends Payment {
 	private static final long serialVersionUID = 1L;
 
