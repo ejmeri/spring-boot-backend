@@ -2,6 +2,7 @@ package com.curse.business.orders.control;
 
 
 import java.util.List;
+import java.util.Set;
 
 import com.curse.business.orders.entity.OrderItem;
 import com.curse.shared.exceptions.ObjectNotFoundException;
@@ -26,5 +27,9 @@ public class OrderItemService {
 	
 	public List<OrderItem> findAll() {
 		return this.orderItemRepository.findAll();
+	}
+
+	public void saveAll(Set<OrderItem> items) {
+		this.orderItemRepository.saveAll(items);
 	}
 }

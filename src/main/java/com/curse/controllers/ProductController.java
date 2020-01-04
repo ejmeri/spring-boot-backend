@@ -25,7 +25,7 @@ public class ProductController  {
     
     @GetMapping(value = "/{id}")
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
-		Product order = this.productService.findbyId(id);
+		Product order = this.productService.findById(id);
 		return ResponseEntity.ok().body(order);
     }
     

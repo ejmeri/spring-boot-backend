@@ -28,4 +28,8 @@ public class PaymentService {
 	public List<Payment> findAll() {
 		return this.paymentRepository.findAll();
 	}
+
+	public void save(Payment payment) {
+		this.paymentRepository.save(payment);
+	}
 }

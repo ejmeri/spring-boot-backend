@@ -78,6 +78,14 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    public void setOrder(Order order) {
+        id.setOrder(order);
+    }
+
+    public void setProduct(Product product) {
+        id.setProduct(product);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
