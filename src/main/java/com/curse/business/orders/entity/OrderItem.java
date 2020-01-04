@@ -31,6 +31,11 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    // get na frente para ser reconhecido pela serialização do json
+    public double getSubTotal() {
+        return (price - discount) * quantity;
+    }
+
     public OrderItemPK getId() {
         return id;
     }

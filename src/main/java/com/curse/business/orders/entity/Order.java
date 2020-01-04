@@ -61,6 +61,16 @@ public class Order implements Serializable {
         this.addressDelivery = addressDelivery;
     }
 
+    public double getTotalValue() {
+        double sum = 0.0;
+
+        for (OrderItem orderItem: items) {
+            sum += orderItem.getSubTotal();
+        }
+
+        return sum;
+    }
+
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
