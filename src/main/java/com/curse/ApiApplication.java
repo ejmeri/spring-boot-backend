@@ -69,20 +69,28 @@ public class ApiApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Category cone = new Category(null, "Informática");
 		Category ctwo = new Category(null, "Escritório");
+		Category cthree = new Category(null, "Eletrodoméstico");
 
 		Product pone = new Product(null, "Computador", 2500.0);
 		Product ptwo = new Product(null, "Impressora", 899.0);
 		Product pthree = new Product(null, "Mouse", 99.0);
+		Product pfour = new Product(null, "Batedeira", 99.0);
+		Product pfive = new Product(null, "Liquidificador", 199.9);
+		
 
 		cone.getProducts().addAll(Arrays.asList(pone, ptwo, pthree));
-		ctwo.getProducts().addAll(Arrays.asList(ptwo));
+		ctwo.getProducts().addAll(Arrays.asList(ptwo, pfour));
+		cthree.getProducts().addAll(Arrays.asList(pfour, pfive));
 
 		pone.getCategories().addAll(Arrays.asList(cone));
 		ptwo.getCategories().addAll(Arrays.asList(cone, ctwo));
 		pthree.getCategories().addAll(Arrays.asList(cone));
+		pfour.getCategories().addAll(Arrays.asList(cthree, ctwo));
+		pfive.getCategories().addAll(Arrays.asList(cthree));
+		
 
-		this.categoryRepository.saveAll(Arrays.asList(cone, ctwo));
-		this.productRepository.saveAll(Arrays.asList(pone, ptwo, pthree));
+		this.categoryRepository.saveAll(Arrays.asList(cone, ctwo, cthree));
+		this.productRepository.saveAll(Arrays.asList(pone, ptwo, pthree, pfour, pfive));
 
 		State stateOne = new State(null, "São Paulo");
 		State stateTwo = new State(null, "Minas Gerais");

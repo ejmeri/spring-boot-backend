@@ -28,4 +28,8 @@ public class OrderService {
 	public List<Order> findAll() {
 		return this.orderRepository.findAll();
 	}
+
+	public Order save(Order order) {
+		return this.orderRepository.save(order);
+	}
 }
