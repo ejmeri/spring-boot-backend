@@ -11,7 +11,7 @@ import com.curse.business.payments.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@Entity
+@Entity(name = "billPayment")
 @JsonTypeName("billPayment")
 public class BillPayment extends Payment {
 	private static final long serialVersionUID = 1L;

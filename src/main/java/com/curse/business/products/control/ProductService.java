@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.curse.business.categories.control.CategoryService;
 import com.curse.business.categories.entity.Category;
-import com.curse.business.orders.entity.OrderItem;
 import com.curse.business.products.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;

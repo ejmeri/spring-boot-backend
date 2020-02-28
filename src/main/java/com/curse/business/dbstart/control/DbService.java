@@ -64,6 +64,7 @@ public class DbService {
         Category cone = new Category(null, "Informática");
 		Category ctwo = new Category(null, "Escritório");
 		Category cthree = new Category(null, "Eletrodoméstico");
+		Category cfour = new Category(null, "Categoria Teste");
 
 		Product pone = new Product(null, "Computador", 2500.0);
 		Product ptwo = new Product(null, "Impressora", 899.0);
@@ -83,7 +84,7 @@ public class DbService {
 		pfive.getCategories().addAll(Arrays.asList(cthree));
 		
 
-		this.categoryRepository.saveAll(Arrays.asList(cone, ctwo, cthree));
+		this.categoryRepository.saveAll(Arrays.asList(cone, ctwo, cthree, cfour));
 		this.productRepository.saveAll(Arrays.asList(pone, ptwo, pthree, pfour, pfive));
 
 		State stateOne = new State(null, "São Paulo");
